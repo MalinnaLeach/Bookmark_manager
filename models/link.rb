@@ -1,6 +1,7 @@
 require 'dm-migrations'
 require 'dm-postgres-adapter'
 require 'data_mapper'
+require 'sinatra'
 
 class Link
     include DataMapper::Resource
@@ -10,6 +11,13 @@ class Link
     property :url   , String
 end
 
-DataMapper.setup(:default, "postgres://localhost/bookmark_manager_test")
+configure :development do
+  DataMapper.setup(:default, "postgres://localhost/bookmark_manager_development")
+end
+
+configure :test do
+  DataMapper.setup(:default, "postgres://localhost/bookmark_manager_test")
+end
+
 DataMapper.finalize
 DataMapper.auto_upgrade!
