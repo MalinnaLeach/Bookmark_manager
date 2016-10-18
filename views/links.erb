@@ -1,5 +1,7 @@
-
+<h1>Links</h1>
 <% @links.each do |link| %>
-TITLE: <%= link.title %>
-URL: <%=  link.url %>
+<li>
+  Title: <%= link.title %>,&nbsp
+  URL:   <%= link.url   %>
+</li>
 <% end %>
