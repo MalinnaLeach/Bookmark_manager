@@ -2,6 +2,8 @@ require 'dm-migrations'
 require 'dm-postgres-adapter'
 require 'data_mapper'
 require 'sinatra'
+require_relative 'data_mapper_setup'
+require_relative 'tag'
 
 class Link
     include DataMapper::Resource
@@ -9,19 +11,10 @@ class Link
     property :id    , Serial
     property :title , String
     property :url   , String
+
+    has n, :tags, :through => Resource
 end
 
-configure :development do
-  DataMapper.setup(:default, "postgres://localhost/bookmark_manager_development")
-end
-
-configure :test do
-  DataMapper.setup(:default, "postgres://localhost/bookmark_manager_test")
-end
-
-configure :production do
-  DataMapper.setup(:default, ENV['DATABASE_URL'])
-end
 
 DataMapper.finalize
 DataMapper.auto_upgrade!

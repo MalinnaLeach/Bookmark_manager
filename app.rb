@@ -1,5 +1,9 @@
 require 'sinatra/base'
 require_relative 'models/link'
+require_relative 'models/tag'
+
+DataMapper.finalize
+DataMapper.auto_upgrade!
 
 class Bookmarks < Sinatra::Base
 
@@ -19,7 +23,9 @@ class Bookmarks < Sinatra::Base
   end
 
   post '/links' do
-      Link.create(url: params[:url], title: params[:title])
+      link = Link.create(url: params[:url], title: params[:title])
+      tag = Tag.create(tag_name: params[:tag])
+      LinkTag.create(:link =>link, :tag => tag)
       redirect '/links'
   end
 
