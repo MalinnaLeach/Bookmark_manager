@@ -5,14 +5,6 @@ class Bookmarks < Sinatra::Base
 
   ENV['RACK_ENV'] ||= 'development'
 
-  configure :development do
-    DataMapper.setup(:default, "postgres://localhost/bookmark_manager_development")
-  end
-
-  configure :test do
-    DataMapper.setup(:default, "postgres://localhost/bookmark_manager_test")
-  end
-
   get '/' do
     'Hello Bookmarks!'
   end
