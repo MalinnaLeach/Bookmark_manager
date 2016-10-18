@@ -14,7 +14,3 @@ class Link
 
     has n, :tags, :through => Resource
 end
-
-
-DataMapper.finalize
-DataMapper.auto_upgrade!
