@@ -11,6 +11,7 @@ gem 'sinatra'
 gem 'rspec-sinatra'
 gem 'rake'
 gem 'coveralls', require: false
+gem 'bcyrpt'
 
 group :test do
   gem 'database_cleaner'

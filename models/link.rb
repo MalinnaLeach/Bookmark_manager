@@ -4,6 +4,7 @@ require 'data_mapper'
 require 'sinatra'
 require_relative 'data_mapper_setup'
 require_relative 'tag'
+require_relative 'user'
 
 class Link
     include DataMapper::Resource

@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require_relative 'models/link'
 require_relative 'models/tag'
+require_relative 'models/user'
 require_relative 'models/data_mapper_setup'
 
   ENV['RACK_ENV'] ||= 'development'
@@ -9,8 +10,21 @@ require_relative 'models/data_mapper_setup'
 
 class Bookmarks < Sinatra::Base
 
+  enable :sessions
+  set :session_secret, 'super secret'
+
   get '/' do
-    'Hello Bookmarks!'
+    erb :index
+  end
+
+  post '/sign-up' do
+    # need to create a Password model, create the password first, then pass that into the User below
+    user = User.create(email: params[:email], password: (encrypt_password(params[:password])))
+    redirect "/welcome/#{params[:email]}"
+  end
+
+  get '/welcome/:email' do
+    :email
   end
 
   get '/links' do
