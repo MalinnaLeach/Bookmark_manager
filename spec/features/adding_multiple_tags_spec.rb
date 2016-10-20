@@ -5,7 +5,7 @@ feature "Adding multiple tags" do
     add_link_multiple_tags
     link = Link.first
     expect(link.tags.map(&:tag_name)).to include('bubbles')
-    expect(link.tags.map(&:tag_name)).to include('search it up')
+    expect(link.tags.map(&:tag_name)).to include('search')
     expect(link.tags.map(&:tag_name)).to include('useful')
   end
 end

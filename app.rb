@@ -1,13 +1,13 @@
 require 'sinatra/base'
 require_relative 'models/link'
 require_relative 'models/tag'
-
-DataMapper.finalize
-DataMapper.auto_upgrade!
-
-class Bookmarks < Sinatra::Base
+require_relative 'models/data_mapper_setup'
 
   ENV['RACK_ENV'] ||= 'development'
+
+  DataMapper.finalize
+
+class Bookmarks < Sinatra::Base
 
   get '/' do
     'Hello Bookmarks!'
@@ -24,8 +24,9 @@ class Bookmarks < Sinatra::Base
 
   post '/links' do
       link = Link.create(url: params[:url], title: params[:title])
-      tag = Tag.create(tag_name: params[:tag])
-      LinkTag.create(:link =>link, :tag => tag)
+      params[:tag].split.each do |tag|
+        LinkTag.create(:link =>link, :tag => Tag.create(tag_name: tag))
+      end
       redirect '/links'
   end
 

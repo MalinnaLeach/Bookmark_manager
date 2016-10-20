@@ -18,6 +18,6 @@ def add_link_multiple_tags
   visit '/links/new'
   fill_in "title", :with => "Google"
   fill_in "url", :with => "http://www.google.com"
-  fill_in "tag", :with => "bubbles, search it up, useful"
+  fill_in "tag", :with => "bubbles search useful"
   click_button "Submit"
 end
