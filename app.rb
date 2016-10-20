@@ -29,8 +29,9 @@ class Bookmarks < Sinatra::Base
       redirect '/links'
   end
 
-  get '/tags/bubbles' do
-    @links = Link.all(:tags => {:tag_name => "bubbles"})
+  get '/tags/:name' do
+    tag = Tag.first(tag_name: params[:name])
+    @links = tag ? tag.links : []
     erb :links
   end
   # start the server if ruby file executed directly
